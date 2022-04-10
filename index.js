@@ -25,9 +25,7 @@ document.documentElement.style.setProperty("--vh", `${vh}px`);
 document.addEventListener("gesturestart", function (e) {
     e.preventDefault();
 });
-document.addEventListener("dblclick", function (e) {
-    e.preventDefault();
-});
+
 btns.forEach((btn) => {
     btn.addEventListener("gesturestart", function (e) {
         e.preventDefault();
