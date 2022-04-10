@@ -377,6 +377,12 @@ button.move {
 }
 
 @media (max-width: 950px) {
+    html {
+        overflow-y: -moz-hidden-unscrollable;
+    }
+    body {
+        overflow-y: -moz-hidden-unscrollable;
+    }
     .palette-container {
         flex-direction: column;
     }
