@@ -11,6 +11,7 @@ body {
     height: 100vh;
     position: relative;
 }
+
 .mask {
     position: absolute;
     width: 100%;
@@ -18,9 +19,11 @@ body {
     z-index: -10;
     background-color: rgba(204, 204, 204, 0.692);
 }
+
 .fa-arrows-up-down {
     display: none;
 }
+
 .palette-container {
     display: flex;
     width: 100%;
@@ -36,6 +39,7 @@ body {
 .palette.before {
     border-left: 4px solid black;
 }
+
 .palette.after {
     border-right: 4px solid black;
 }
@@ -46,9 +50,9 @@ body {
     left: 0;
     right: 0;
     text-align: center;
-
     bottom: 15%;
 }
+
 .palette .copy {
     font-size: 1.5rem;
     position: absolute;
@@ -84,10 +88,12 @@ div.button {
     border-radius: 5%;
     margin: 0 1rem;
 }
+
 .changeColor:hover {
     cursor: pointer;
     background-color: #0d65e9;
 }
+
 .back {
     background-color: #0d6efd;
     color: #fff;
@@ -96,6 +102,7 @@ div.button {
     border-radius: 5%;
     margin: 0 1rem;
 }
+
 .back:hover {
     cursor: pointer;
     background-color: #0d65e9;
@@ -109,10 +116,12 @@ div.button {
     border-radius: 5%;
     margin: 0 1rem;
 }
+
 .front:hover {
     cursor: pointer;
     background-color: #0d65e9;
 }
+
 .saveColor {
     background-color: #0d6efd;
     color: #fff;
@@ -121,10 +130,12 @@ div.button {
     border-radius: 5%;
     margin: 0 1rem;
 }
+
 .saveColor:hover {
     cursor: pointer;
     background-color: #0d65e9;
 }
+
 .lock {
     padding: 1rem;
     background-color: transparent;
@@ -136,10 +147,12 @@ div.button {
     right: 0;
     margin: 0 auto;
 }
+
 .lock:hover {
     cursor: pointer;
     transform: scale(1.1);
 }
+
 .fa-lock {
     display: none;
 }
@@ -148,7 +161,7 @@ div.button {
     border-radius: 0.5rem;
     width: 30vw;
     height: 30vh;
-    background-color: rgb(250, 250, 250);
+    background-color: #fafafa;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -175,6 +188,7 @@ div.button {
     border: none;
     font-size: 1.5rem;
 }
+
 .saveColorWindow .close:hover {
     cursor: pointer;
 }
@@ -184,12 +198,14 @@ div.button {
     border-radius: 0.3rem;
     padding: 0.5rem 1rem;
     border: none;
-    color: rgb(253, 253, 253);
+    color: #fdfdfd;
 }
+
 .saveColorWindow .save:hover {
     cursor: pointer;
     background-color: #0d62e2;
 }
+
 .saveColorWindow .cancel {
     border-radius: 0.3rem;
     border: none;
@@ -204,30 +220,33 @@ div.button {
 
 .saveColorWindow .collection {
     border-radius: 0.3rem;
-
     outline: none;
     border: none;
     width: 80%;
     margin: 3rem auto;
     display: flex;
 }
+
 .saveColorWindow .collection div {
     flex-grow: 1;
     padding: 0.3rem;
     height: 2.5rem;
     position: relative;
 }
+
 .saveColorWindow .collection div span {
     position: absolute;
     border-radius: 0;
-    color: rgb(2, 2, 2);
+    color: #020202;
     bottom: -60%;
     left: 0;
     right: 0;
 }
+
 .saveColorWindow .collection div:first-child {
     border-radius: 0.4rem 0 0 0.4rem;
 }
+
 .saveColorWindow .collection div:last-child {
     border-radius: 0 0.4rem 0.4rem 0;
 }
@@ -242,6 +261,7 @@ div.button {
     transform: translate(100%);
     transition: transform 0.3s ease-in-out;
 }
+
 .colorSideMenuOn {
     transform: translate(0%);
 }
@@ -254,10 +274,12 @@ div.button {
     border-radius: 5%;
     margin: 0 1rem;
 }
+
 .colorSideMenuButton:hover {
     cursor: pointer;
     background-color: #0d65e9;
 }
+
 .colorSideMenuClose {
     border-radius: 50%;
     width: 30px;
@@ -283,7 +305,6 @@ div.button {
 .sideMenuContainer {
     margin-top: 15%;
     width: 100%;
-
     display: flex;
     flex-direction: column;
 }
@@ -294,22 +315,27 @@ div.button {
     justify-content: center;
     padding: 1rem 0;
 }
+
 .sideMenuItem:hover {
     /* cursor: pointer; */
     /* background-color: rgba(123, 43, 199, 0.623); */
 }
+
 .sideMenuItem .colors {
     display: flex;
     width: 60%;
     margin: 0 1rem;
 }
+
 .sideMenuItem div div {
     flex-grow: 1;
     height: 3rem;
 }
+
 .sideMenuItem div:first-child {
     border-radius: 0.3rem 0 0 0.3rem;
 }
+
 .sideMenuItem div:last-child {
     border-radius: 0 0.3rem 0.3rem 0;
 }
@@ -322,6 +348,7 @@ div.button {
     border-radius: 10%;
     margin: 0 0.2rem;
 }
+
 .selectColor:hover {
     cursor: pointer;
     background-color: #0d65e9;
@@ -335,6 +362,7 @@ div.button {
     border-radius: 10%;
     margin: 0 0.2rem;
 }
+
 .deleteColor:hover {
     cursor: pointer;
     background-color: #c73140;
@@ -355,10 +383,12 @@ label.colorInput {
     font-size: 1.8rem;
     transition: transform 0.1s ease-in-out;
 }
+
 label.colorInput:hover {
     transform: scale(1.2);
     cursor: pointer;
 }
+
 button.move {
     background-color: transparent;
     border: none;
@@ -368,9 +398,9 @@ button.move {
     margin: auto;
     bottom: 35%;
     font-size: 2rem;
-
     transition: transform 0.1s ease-in-out;
 }
+
 .move:hover {
     cursor: pointer;
     transform: scale(1.2);
@@ -378,10 +408,11 @@ button.move {
 
 @media (max-width: 950px) {
     html {
-        overflow-y: -moz-hidden-unscrollable;
+        /* max-height: 100vh; */
+        overflow-x: -moz-hidden-unscrollable;
     }
     body {
-        overflow-y: -moz-hidden-unscrollable;
+        overflow-x: -moz-hidden-unscrollable;
     }
     .palette-container {
         flex-direction: column;
@@ -400,7 +431,6 @@ button.move {
         margin: auto 0;
         font-size: 1.2rem;
     }
-
     .palette span {
         font-size: 1.2rem;
         position: absolute;
@@ -411,7 +441,6 @@ button.move {
         height: fit-content;
         margin: auto 0;
     }
-
     .palette .copy {
         left: auto;
         right: 15%;
@@ -421,19 +450,15 @@ button.move {
         top: 0;
         color: #fff;
     }
-
     button.move {
         left: auto;
         right: 25%;
         top: 0;
         bottom: 0;
         margin: auto;
-
         font-size: 1.2rem;
-
         transition: transform 0.1s ease-in-out;
     }
-
     label.colorInput {
         position: absolute;
         left: auto;
@@ -445,7 +470,6 @@ button.move {
         width: fit-content;
         font-size: 1.2rem;
     }
-
     .palette.before {
         border-left: none;
         border-top: 4px solid black;
@@ -468,8 +492,8 @@ button.move {
         padding: 15px;
         margin: 0 0.5rem;
     }
-
     .colorSideMenu {
         width: 70%;
     }
 }
+/*# sourceMappingURL=style.css.map */
