@@ -17,6 +17,7 @@ const sideMenuContainer = document.querySelector(".sideMenuContainer");
 const copyButton = document.querySelector(".copy");
 const colorSelectors = document.querySelectorAll("input[type=color]");
 const btns = document.querySelectorAll(".btn");
+const i = document.querySelectorAll(".btn i");
 //////////// 這邊是對手機端瀏覽器做一些優化
 //符合螢幕高度
 let vh = window.innerHeight * 0.01;
@@ -29,6 +30,11 @@ document.addEventListener("dblclick", () => {
     e.preventDefault();
 });
 btns.forEach((btn) => {
+    btn.addEventListener("gesturestart", function (e) {
+        e.preventDefault();
+    });
+});
+i.forEach((btn) => {
     btn.addEventListener("gesturestart", function (e) {
         e.preventDefault();
     });
