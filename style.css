@@ -438,6 +438,7 @@ button.move {
         right: 5%;
         margin: auto 0;
         font-size: 1.2rem;
+        height: fit-content;
     }
     .palette span {
         font-size: 1.2rem;
@@ -457,6 +458,7 @@ button.move {
         bottom: 0;
         top: 0;
         color: #fff;
+        height: fit-content;
     }
     button.move {
         left: auto;
@@ -466,11 +468,12 @@ button.move {
         margin: auto;
         font-size: 1.2rem;
         transition: transform 0.1s ease-in-out;
+        height: fit-content;
     }
     label.colorInput {
         position: absolute;
         left: auto;
-        right: 35%;
+        right: 33%;
         margin: auto 0;
         top: 0;
         bottom: 0;
