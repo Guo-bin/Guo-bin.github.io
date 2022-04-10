@@ -24,6 +24,9 @@ document.documentElement.style.setProperty("--vh", `${vh}px`);
 document.addEventListener("gesturestart", function (e) {
     e.preventDefault();
 });
+document.addEventListener("dblclick", function (e) {
+    e.preventDefault();
+});
 ///////////
 let colorHistory = [];
 let currentHistory = 0;
