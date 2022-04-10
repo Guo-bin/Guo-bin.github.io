@@ -411,11 +411,11 @@ button.move {
         display: none;
     }
     html {
-        max-height: 100vh;
-        overflow-x: -moz-hidden-unscrollable;
+        overflow: -moz-hidden-unscrollable;
     }
     body {
-        overflow-x: -moz-hidden-unscrollable;
+        height: 85vh;
+        overflow: -moz-hidden-unscrollable;
     }
     .palette-container {
         flex-direction: column;
