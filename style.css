@@ -410,6 +410,11 @@ button.move {
     body::-webkit-scrollbar {
         display: none;
     }
+    html,
+    body {
+        width: 100%;
+        overflow: hidden;
+    }
     html {
         overflow: -moz-hidden-unscrollable;
     }
