@@ -16,6 +16,7 @@ const colorSideMenuClose = document.querySelector(".colorSideMenuClose");
 const sideMenuContainer = document.querySelector(".sideMenuContainer");
 const copyButton = document.querySelector(".copy");
 const colorSelectors = document.querySelectorAll("input[type=color]");
+const btns = document.querySelectorAll(".btn");
 //////////// 這邊是對手機端瀏覽器做一些優化
 //符合螢幕高度
 let vh = window.innerHeight * 0.01;
@@ -26,6 +27,11 @@ document.addEventListener("gesturestart", function (e) {
 });
 document.addEventListener("dblclick", function (e) {
     e.preventDefault();
+});
+btns.forEach((btn) => {
+    btn.addEventListener("gesturestart", function (e) {
+        e.preventDefault();
+    });
 });
 ///////////
 let colorHistory = [];
