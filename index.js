@@ -16,7 +16,8 @@ const colorSideMenuClose = document.querySelector(".colorSideMenuClose");
 const sideMenuContainer = document.querySelector(".sideMenuContainer");
 const copyButton = document.querySelector(".copy");
 const colorSelectors = document.querySelectorAll("input[type=color]");
-
+let vh = window.innerHeight * 0.01;
+document.documentElement.style.setProperty("--vh", `${vh}px`);
 let colorHistory = [];
 let currentHistory = 0;
 //create a random hex

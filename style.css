@@ -8,7 +8,8 @@
 body {
     overflow-x: hidden;
     width: 100vw;
-    height: 100vh;
+    height: 100vh; /* Fallback for browsers that do not support Custom Properties */
+    height: calc(var(--vh, 1vh) * 100);
     position: relative;
 }
 
@@ -419,7 +420,6 @@ button.move {
         overflow: -moz-hidden-unscrollable;
     }
     body {
-        height: 85vh;
         overflow: -moz-hidden-unscrollable;
     }
     .palette-container {
