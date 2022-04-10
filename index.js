@@ -16,8 +16,15 @@ const colorSideMenuClose = document.querySelector(".colorSideMenuClose");
 const sideMenuContainer = document.querySelector(".sideMenuContainer");
 const copyButton = document.querySelector(".copy");
 const colorSelectors = document.querySelectorAll("input[type=color]");
+//////////// 這邊是對手機端瀏覽器做一些優化
+//符合螢幕高度
 let vh = window.innerHeight * 0.01;
 document.documentElement.style.setProperty("--vh", `${vh}px`);
+//雙點擊不要放大螢幕
+document.addEventListener("gesturestart", function (e) {
+    e.preventDefault();
+});
+///////////
 let colorHistory = [];
 let currentHistory = 0;
 //create a random hex
