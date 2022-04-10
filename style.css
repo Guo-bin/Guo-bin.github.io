@@ -411,7 +411,7 @@ button.move {
         display: none;
     }
     html {
-        /* max-height: 100vh; */
+        max-height: 100vh;
         overflow-x: -moz-hidden-unscrollable;
     }
     body {
