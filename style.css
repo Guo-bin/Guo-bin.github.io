@@ -407,6 +407,9 @@ button.move {
 }
 
 @media (max-width: 950px) {
+    body::-webkit-scrollbar {
+        display: none;
+    }
     html {
         /* max-height: 100vh; */
         overflow-x: -moz-hidden-unscrollable;
