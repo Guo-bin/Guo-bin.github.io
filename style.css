@@ -412,8 +412,9 @@ button.move {
     }
     html,
     body {
+        position: fixed;
         width: 100%;
-        overflow: hidden;
+        height: 100%;
     }
     html {
         overflow: -moz-hidden-unscrollable;
