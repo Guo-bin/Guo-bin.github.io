@@ -317,11 +317,6 @@ div.button {
     padding: 1rem 0;
 }
 
-.sideMenuItem:hover {
-    /* cursor: pointer; */
-    /* background-color: rgba(123, 43, 199, 0.623); */
-}
-
 .sideMenuItem .colors {
     display: flex;
     width: 60%;
@@ -429,6 +424,9 @@ button.move {
         flex-grow: 1;
         text-align: center;
         position: relative;
+    }
+    .btn:focus {
+        background-color: none;
     }
     .lock {
         padding: 0;
