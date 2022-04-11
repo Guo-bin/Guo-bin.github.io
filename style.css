@@ -408,14 +408,14 @@ button.move {
     }
     html,
     body {
-        position: fixed;
+        /* position: fixed; */
         width: 100%;
     }
     html {
-        overflow: -moz-hidden-unscrollable;
+        overflow-x: -moz-hidden-unscrollable;
     }
     body {
-        overflow: -moz-hidden-unscrollable;
+        overflow-x: -moz-hidden-unscrollable;
     }
     .palette-container {
         flex-direction: column;
