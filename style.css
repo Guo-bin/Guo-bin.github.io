@@ -404,11 +404,11 @@ button.move {
 
 @media (max-width: 950px) {
     body::-webkit-scrollbar {
-        display: none;
+        /* display: none; */
     }
     html,
     body {
-        /* position: fixed; */
+        position: fixed;
         width: 100%;
     }
     html {
