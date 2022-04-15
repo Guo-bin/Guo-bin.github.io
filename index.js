@@ -477,7 +477,7 @@ function addPointerEvt(element, index) {
     function translateY(e) {
         e.preventDefault();
         let currentPalettePosition = Number(element.dataset.number);
-        element.setPointerCapture(e.pointerId);
+        // element.setPointerCapture(e.pointerId);
 
         const moveDistance = e.clientY - element.offsetHeight / 2 - element.offsetHeight * currentPalettePosition;
         element.style.transform = `translate(0,${moveDistance}px)`;
