@@ -519,6 +519,7 @@ function addPointerEvt(element, index) {
     //     e.preventDefault();
     // });
     element.addEventListener("pointerdown", (e) => {
+        window.alert("YOU CLICK ME");
         e.preventDefault();
         console.log(window.innerWidth);
         element.style.zIndex = "8";
