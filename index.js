@@ -418,9 +418,7 @@ palettes.forEach((palette, index) => {
             palette.children[i].addEventListener("pointerdown", (e) => {
                 e.stopPropagation();
             });
-            palette.children[i].addEventListener("pointerup", (e) => {
-                e.stopPropagation();
-            });
+            
         }
         palette.children[i].addEventListener("touchstart", (e) => {
             e.stopPropagation();
