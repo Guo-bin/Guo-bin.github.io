@@ -413,10 +413,10 @@ button.move {
         width: 100%;
     }
     html {
-        overflow-x: -moz-hidden-unscrollable;
+        overflow: -moz-hidden-unscrollable;
     }
     body {
-        overflow-x: -moz-hidden-unscrollable;
+        overflow: -moz-hidden-unscrollable;
     }
     .palette-container {
         flex-direction: column;
