@@ -368,6 +368,7 @@ input[type="color"] {
     position: absolute;
     z-index: -10;
     background:transparent;
+    border:none;
 }
 
 label.colorInput {
