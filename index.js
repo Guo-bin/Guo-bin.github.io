@@ -44,7 +44,7 @@ i.forEach((btn) => {
         e.preventDefault();
     });
 });
-
+window.alert("1")
 ///////////
 let colorHistory = [];
 let currentHistory = 0;
@@ -516,9 +516,7 @@ function addPointerEvt(element, index) {
             itemIndex--;
         }
     }
-    element.addEventListener("touchstart", (e) => {
-        e.preventDefault();
-    });
+   
     element.addEventListener("pointerdown", (e) => {
         e.preventDefault();
         console.log(window.innerWidth);
