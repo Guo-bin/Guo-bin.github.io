@@ -44,21 +44,7 @@ i.forEach((btn) => {
         e.preventDefault();
     });
 });
-//禁止滑動
-// const html = document.querySelector("html");
-// const body = document.querySelector("body");
-// html.addEventListener("pointerdown", (e) => {
-//     e.preventDefault();
-// });
-// html.addEventListener("pointermove", (e) => {
-//     e.preventDefault();
-// });
-// body.addEventListener("pointerdown", (e) => {
-//     e.preventDefault();
-// });
-// body.addEventListener("pointermove", (e) => {
-//     e.preventDefault();
-// });
+
 ///////////
 let colorHistory = [];
 let currentHistory = 0;
@@ -529,8 +515,11 @@ function addPointerEvt(element, index) {
             itemIndex--;
         }
     }
-
+    element.addEventListener("touchstart", (e) => {
+        e.preventDefault();
+    });
     element.addEventListener("pointerdown", (e) => {
+        e.preventDefault();
         console.log(window.innerWidth);
         element.style.zIndex = "8";
         itemIndex = Number(element.dataset.index);
@@ -545,6 +534,7 @@ function addPointerEvt(element, index) {
     });
 
     element.addEventListener("pointerup", (e) => {
+        e.preventDefault();
         for (let i = 0; i < 5; i++) {
             const palette = document.querySelector(`[data-index="${i}"]`);
             palette.dataset.move = "false";
