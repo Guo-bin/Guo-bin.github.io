@@ -537,7 +537,6 @@ function addPointerEvt(element, index) {
     });
 
     element.addEventListener("pointerup", (e) => {
-        e.preventDefault();
         for (let i = 0; i < 5; i++) {
             const palette = document.querySelector(`[data-index="${i}"]`);
             palette.dataset.move = "false";
