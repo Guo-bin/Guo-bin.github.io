@@ -44,7 +44,7 @@ i.forEach((btn) => {
         e.preventDefault();
     });
 });
-window.alert("2")
+window.alert("3")
 ///////////
 let colorHistory = [];
 let currentHistory = 0;
