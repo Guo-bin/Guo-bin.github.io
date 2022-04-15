@@ -47,10 +47,16 @@ i.forEach((btn) => {
 //禁止滑動
 const html = document.querySelector("html");
 const body = document.querySelector("body");
-html.addEventListener("pointerdown", () => {
+html.addEventListener("pointerdown", (e) => {
     e.preventDefault();
 });
-body.addEventListener("pointerdown", () => {
+html.addEventListener("pointermove", (e) => {
+    e.preventDefault();
+});
+body.addEventListener("pointerdown", (e) => {
+    e.preventDefault();
+});
+body.addEventListener("pointermove", (e) => {
     e.preventDefault();
 });
 ///////////
