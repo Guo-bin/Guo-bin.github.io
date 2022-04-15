@@ -523,7 +523,7 @@ function addPointerEvt(element, index) {
     });
     element.addEventListener("pointerdown", (e) => {
         e.preventDefault();
-
+        element.setPointerCapture(e.pointerId);
         console.log(window.innerWidth);
         element.style.zIndex = "8";
         itemIndex = Number(element.dataset.index);
