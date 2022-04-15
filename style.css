@@ -387,9 +387,6 @@ label.colorInput:hover {
     transform: scale(1.2);
     cursor: pointer;
 }
-label.colorInput:focus {
-    transform: scale(1);
-}
 
 button.move {
     background-color: transparent;

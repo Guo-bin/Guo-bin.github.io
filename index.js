@@ -405,7 +405,7 @@ let paletteMidLineY = [];
 let containerWidth = container.offsetWidth;
 let paletteWidth = containerWidth / 5;
 let paletteMidLineX = [];
-window.alert("hi22ss3");
+window.alert("hi22ss3SS");
 palettes.forEach((palette, index) => {
     paletteMidLineY.push(paletteHeight / 2 + paletteHeight * index);
     paletteMidLineX.push(paletteWidth / 2 + paletteWidth * index);
@@ -420,9 +420,6 @@ palettes.forEach((palette, index) => {
                 e.stopPropagation();
             });
         }
-        palette.children[i].addEventListener("touchstart", (e) => {
-            e.stopPropagation();
-        });
     }
 
     addPointerEvt(palette, index);
