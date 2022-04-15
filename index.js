@@ -405,146 +405,146 @@ let paletteMidLineY = [];
 let containerWidth = container.offsetWidth;
 let paletteWidth = containerWidth / 5;
 let paletteMidLineX = [];
+window.alert("hi");
+// palettes.forEach((palette, index) => {
+//     paletteMidLineY.push(paletteHeight / 2 + paletteHeight * index);
+//     paletteMidLineX.push(paletteWidth / 2 + paletteWidth * index);
+//     palette.dataset.index = index;
+//     palette.dataset.number = index;
+//     palette.dataset.move = "false";
 
-palettes.forEach((palette, index) => {
-    paletteMidLineY.push(paletteHeight / 2 + paletteHeight * index);
-    paletteMidLineX.push(paletteWidth / 2 + paletteWidth * index);
-    palette.dataset.index = index;
-    palette.dataset.number = index;
-    palette.dataset.move = "false";
+//     for (let i = 0; i < palette.childElementCount; i++) {
+//         if (i !== 3) {
+//             palette.children[i].addEventListener("pointerdown", (e) => {
+//                 e.stopPropagation();
+//             });
+//         }
+//         palette.children[i].addEventListener("touchstart", (e) => {
+//             e.stopPropagation();
+//         });
+//     }
 
-    for (let i = 0; i < palette.childElementCount; i++) {
-        if (i !== 3) {
-            palette.children[i].addEventListener("pointerdown", (e) => {
-                e.stopPropagation();
-            });
-        }
-        palette.children[i].addEventListener("touchstart", (e) => {
-            e.stopPropagation();
-        });
-    }
+//     addPointerEvt(palette, index);
+// });
 
-    addPointerEvt(palette, index);
-});
+// function addPointerEvt(element, index) {
+//     let itemIndex;
 
-function addPointerEvt(element, index) {
-    let itemIndex;
+//     function translateX(e) {
+//         e.preventDefault();
+//         let currentPalettePosition = Number(element.dataset.number);
+//         element.setPointerCapture(e.pointerId);
 
-    function translateX(e) {
-        e.preventDefault();
-        let currentPalettePosition = Number(element.dataset.number);
-        element.setPointerCapture(e.pointerId);
+//         const moveDistance = e.clientX - element.offsetWidth / 2 - element.offsetWidth * currentPalettePosition;
+//         element.style.transform = `translate(${moveDistance}px,0)`;
 
-        const moveDistance = e.clientX - element.offsetWidth / 2 - element.offsetWidth * currentPalettePosition;
-        element.style.transform = `translate(${moveDistance}px,0)`;
+//         if (e.clientX + element.offsetWidth / 2 > paletteMidLineX[itemIndex + 1]) {
+//             const nextElement = document.querySelector(`[data-index="${itemIndex + 1}"]`);
+//             if (nextElement.dataset.move == "true") {
+//                 nextElement.style.transform = `translate(0,0px)`;
+//                 element.dataset.index = itemIndex + 1;
+//                 nextElement.dataset.index = itemIndex;
+//                 nextElement.dataset.move = "false";
+//                 itemIndex++;
+//                 return;
+//             }
+//             nextElement.style.transform = `translate(${-element.offsetWidth}px,0)`;
+//             element.dataset.index = itemIndex + 1;
+//             nextElement.dataset.index = itemIndex;
+//             nextElement.dataset.move = "true";
+//             itemIndex++;
+//         }
+//         if (e.clientX - element.offsetWidth / 2 < paletteMidLineX[itemIndex - 1]) {
+//             const lastElement = document.querySelector(`[data-index="${itemIndex - 1}"]`);
 
-        if (e.clientX + element.offsetWidth / 2 > paletteMidLineX[itemIndex + 1]) {
-            const nextElement = document.querySelector(`[data-index="${itemIndex + 1}"]`);
-            if (nextElement.dataset.move == "true") {
-                nextElement.style.transform = `translate(0,0px)`;
-                element.dataset.index = itemIndex + 1;
-                nextElement.dataset.index = itemIndex;
-                nextElement.dataset.move = "false";
-                itemIndex++;
-                return;
-            }
-            nextElement.style.transform = `translate(${-element.offsetWidth}px,0)`;
-            element.dataset.index = itemIndex + 1;
-            nextElement.dataset.index = itemIndex;
-            nextElement.dataset.move = "true";
-            itemIndex++;
-        }
-        if (e.clientX - element.offsetWidth / 2 < paletteMidLineX[itemIndex - 1]) {
-            const lastElement = document.querySelector(`[data-index="${itemIndex - 1}"]`);
+//             if (lastElement.dataset.move == "true") {
+//                 lastElement.style.transform = `translate(0,0)`;
+//                 element.dataset.index = itemIndex - 1;
+//                 lastElement.dataset.index = itemIndex;
+//                 lastElement.dataset.move = "false";
+//                 itemIndex--;
+//                 return;
+//             }
+//             lastElement.style.transform = `translate(${element.offsetWidth}px,0)`;
+//             element.dataset.index = itemIndex - 1;
+//             lastElement.dataset.index = itemIndex;
+//             lastElement.dataset.move = "true";
+//             itemIndex--;
+//         }
+//     }
 
-            if (lastElement.dataset.move == "true") {
-                lastElement.style.transform = `translate(0,0)`;
-                element.dataset.index = itemIndex - 1;
-                lastElement.dataset.index = itemIndex;
-                lastElement.dataset.move = "false";
-                itemIndex--;
-                return;
-            }
-            lastElement.style.transform = `translate(${element.offsetWidth}px,0)`;
-            element.dataset.index = itemIndex - 1;
-            lastElement.dataset.index = itemIndex;
-            lastElement.dataset.move = "true";
-            itemIndex--;
-        }
-    }
+//     function translateY(e) {
+//         e.preventDefault();
+//         let currentPalettePosition = Number(element.dataset.number);
+//         element.setPointerCapture(e.pointerId);
 
-    function translateY(e) {
-        e.preventDefault();
-        let currentPalettePosition = Number(element.dataset.number);
-        element.setPointerCapture(e.pointerId);
+//         const moveDistance = e.clientY - element.offsetHeight / 2 - element.offsetHeight * currentPalettePosition;
+//         element.style.transform = `translate(0,${moveDistance}px)`;
 
-        const moveDistance = e.clientY - element.offsetHeight / 2 - element.offsetHeight * currentPalettePosition;
-        element.style.transform = `translate(0,${moveDistance}px)`;
+//         if (e.clientY + element.offsetHeight / 2 > paletteMidLineY[itemIndex + 1]) {
+//             const nextElement = document.querySelector(`[data-index="${itemIndex + 1}"]`);
+//             if (nextElement.dataset.move == "true") {
+//                 nextElement.style.transform = `translate(0,0px)`;
+//                 element.dataset.index = itemIndex + 1;
+//                 nextElement.dataset.index = itemIndex;
+//                 nextElement.dataset.move = "false";
+//                 itemIndex++;
+//                 return;
+//             }
+//             nextElement.style.transform = `translate(0,${-element.offsetHeight}px)`;
+//             element.dataset.index = itemIndex + 1;
+//             nextElement.dataset.index = itemIndex;
+//             nextElement.dataset.move = "true";
+//             itemIndex++;
+//         }
+//         if (e.clientY - element.offsetHeight / 2 < paletteMidLineY[itemIndex - 1]) {
+//             const lastElement = document.querySelector(`[data-index="${itemIndex - 1}"]`);
 
-        if (e.clientY + element.offsetHeight / 2 > paletteMidLineY[itemIndex + 1]) {
-            const nextElement = document.querySelector(`[data-index="${itemIndex + 1}"]`);
-            if (nextElement.dataset.move == "true") {
-                nextElement.style.transform = `translate(0,0px)`;
-                element.dataset.index = itemIndex + 1;
-                nextElement.dataset.index = itemIndex;
-                nextElement.dataset.move = "false";
-                itemIndex++;
-                return;
-            }
-            nextElement.style.transform = `translate(0,${-element.offsetHeight}px)`;
-            element.dataset.index = itemIndex + 1;
-            nextElement.dataset.index = itemIndex;
-            nextElement.dataset.move = "true";
-            itemIndex++;
-        }
-        if (e.clientY - element.offsetHeight / 2 < paletteMidLineY[itemIndex - 1]) {
-            const lastElement = document.querySelector(`[data-index="${itemIndex - 1}"]`);
+//             if (lastElement.dataset.move == "true") {
+//                 lastElement.style.transform = `translate(0,0)`;
+//                 element.dataset.index = itemIndex - 1;
+//                 lastElement.dataset.index = itemIndex;
+//                 lastElement.dataset.move = "false";
+//                 itemIndex--;
+//                 return;
+//             }
+//             lastElement.style.transform = `translate(0,${element.offsetHeight}px)`;
+//             element.dataset.index = itemIndex - 1;
+//             lastElement.dataset.index = itemIndex;
+//             lastElement.dataset.move = "true";
+//             itemIndex--;
+//         }
+//     }
+//     element.addEventListener("touchstart", (e) => {
+//         e.preventDefault();
+//     });
+//     element.addEventListener("pointerdown", (e) => {
+//         e.preventDefault();
+//         console.log(window.innerWidth);
+//         element.style.zIndex = "8";
+//         itemIndex = Number(element.dataset.index);
+//         if (window.innerWidth <= 950) {
+//             element.addEventListener("pointermove", translateY);
+//             element.removeEventListener("pointermove", translateX);
+//         }
+//         if (window.innerWidth > 950) {
+//             element.addEventListener("pointermove", translateX);
+//             element.removeEventListener("pointermove", translateY);
+//         }
+//     });
 
-            if (lastElement.dataset.move == "true") {
-                lastElement.style.transform = `translate(0,0)`;
-                element.dataset.index = itemIndex - 1;
-                lastElement.dataset.index = itemIndex;
-                lastElement.dataset.move = "false";
-                itemIndex--;
-                return;
-            }
-            lastElement.style.transform = `translate(0,${element.offsetHeight}px)`;
-            element.dataset.index = itemIndex - 1;
-            lastElement.dataset.index = itemIndex;
-            lastElement.dataset.move = "true";
-            itemIndex--;
-        }
-    }
-    element.addEventListener("touchstart", (e) => {
-        e.preventDefault();
-    });
-    element.addEventListener("pointerdown", (e) => {
-        e.preventDefault();
-        console.log(window.innerWidth);
-        element.style.zIndex = "8";
-        itemIndex = Number(element.dataset.index);
-        if (window.innerWidth <= 950) {
-            element.addEventListener("pointermove", translateY);
-            element.removeEventListener("pointermove", translateX);
-        }
-        if (window.innerWidth > 950) {
-            element.addEventListener("pointermove", translateX);
-            element.removeEventListener("pointermove", translateY);
-        }
-    });
+//     element.addEventListener("pointerup", (e) => {
+//         for (let i = 0; i < 5; i++) {
+//             const palette = document.querySelector(`[data-index="${i}"]`);
+//             palette.dataset.move = "false";
+//             palette.dataset.number = `${palette.dataset.index}`;
+//             palette.style.transform = `translate(0,0)`;
+//             palette.style.zIndex = "0";
 
-    element.addEventListener("pointerup", (e) => {
-        for (let i = 0; i < 5; i++) {
-            const palette = document.querySelector(`[data-index="${i}"]`);
-            palette.dataset.move = "false";
-            palette.dataset.number = `${palette.dataset.index}`;
-            palette.style.transform = `translate(0,0)`;
-            palette.style.zIndex = "0";
-
-            container.appendChild(palette);
-        }
-        element.releasePointerCapture(e.pointerId);
-        element.removeEventListener("pointermove", translateY);
-        element.removeEventListener("pointermove", translateX);
-    });
-}
+//             container.appendChild(palette);
+//         }
+//         element.releasePointerCapture(e.pointerId);
+//         element.removeEventListener("pointermove", translateY);
+//         element.removeEventListener("pointermove", translateX);
+//     });
+// }
