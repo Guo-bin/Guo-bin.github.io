@@ -367,6 +367,7 @@ div.button {
 input[type="color"] {
     position: absolute;
     z-index: -10;
+    display: none;
 }
 
 label.colorInput {
@@ -469,7 +470,7 @@ button.move {
     label.colorInput {
         position: absolute;
         left: auto;
-        right: 33%;
+        right: 25%;
         margin: auto 0;
         top: 0;
         bottom: 0;
@@ -489,7 +490,7 @@ button.move {
         display: none;
     }
     .fa-arrows-up-down {
-        display: initial;
+        display: none;
     }
     .saveColorWindow {
         width: 100%;

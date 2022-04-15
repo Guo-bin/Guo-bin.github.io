@@ -1,5 +1,6 @@
 const palettes = document.querySelectorAll(".palette");
-const list = document.querySelector(".palette-container");
+const palette1 = document.querySelector(".palette");
+const container = document.querySelector(".palette-container");
 const mask = document.querySelector(".mask");
 const changeButton = document.querySelector(".changeColor");
 const turnBackButton = document.querySelector(".back");
@@ -18,6 +19,7 @@ const copyButton = document.querySelector(".copy");
 const colorSelectors = document.querySelectorAll("input[type=color]");
 const btns = document.querySelectorAll(".btn");
 const i = document.querySelectorAll(".btn i");
+const moveButton = document.querySelector(".move");
 //////////// 這邊是對手機端瀏覽器做一些優化
 //符合螢幕高度
 let vh = window.innerHeight * 0.01;
@@ -26,7 +28,7 @@ document.documentElement.style.setProperty("--vh", `${vh}px`);
 document.addEventListener("gesturestart", function (e) {
     e.preventDefault();
 });
-document.addEventListener("dblclick", () => {
+document.addEventListener("dblclick", (e) => {
     e.preventDefault();
 });
 btns.forEach((btn) => {
@@ -41,6 +43,15 @@ i.forEach((btn) => {
     btn.addEventListener("gesturestart", function (e) {
         e.preventDefault();
     });
+});
+//禁止滑動
+const html = document.querySelector("html");
+const body = document.querySelector("body");
+html.addEventListener("pointerdown", () => {
+    e.preventDefault();
+});
+body.addEventListener("pointerdown", () => {
+    e.preventDefault();
 });
 ///////////
 let colorHistory = [];
@@ -137,7 +148,7 @@ function initializePalette() {
         selectColor(colorSelector);
 
         // add Drag event to palette;
-        addDragEvt(palette);
+        // addDragEvt(palette);
     });
     //push color set to colorHistory;
     colorHistory.push(subColorArr);
@@ -153,6 +164,7 @@ function turnBack() {
             palette.children[0].innerHTML = colorHistory[currentHistory][index];
             palette.children[3].value = `#${colorHistory[currentHistory][index]}`;
             console.log(palette.style.backgroundColor);
+            brightnessChange(palette, colorHistory[currentHistory][index]);
         });
     }
 }
@@ -164,6 +176,7 @@ function turnFront() {
             palette.style.backgroundColor = `#${colorHistory[currentHistory][index]}`;
             palette.children[0].innerHTML = colorHistory[currentHistory][index];
             palette.children[3].value = `#${colorHistory[currentHistory][index]}`;
+            brightnessChange(palette, colorHistory[currentHistory][index]);
         });
     }
 }
@@ -319,7 +332,7 @@ mask.addEventListener("click", () => {
     saveColorWindow.classList.remove("saveColorWindowOn");
     mask.style.zIndex = "-1";
 });
-function copyHex() {
+function copyHex(e) {
     let colorHex = this.parentElement.dataset.color;
     const input = document.createElement("input");
     document.body.appendChild(input);
@@ -390,4 +403,153 @@ function addDropEvt(element) {
     });
 }
 
-addDropEvt(list);
+// addDropEvt(container);
+
+//use when width less 950px;
+let containerHeight = container.offsetHeight;
+let paletteHeight = containerHeight / 5;
+let paletteMidLineY = [];
+//use when width more 950px;
+let containerWidth = container.offsetWidth;
+let paletteWidth = containerWidth / 5;
+let paletteMidLineX = [];
+
+palettes.forEach((palette, index) => {
+    paletteMidLineY.push(paletteHeight / 2 + paletteHeight * index);
+    paletteMidLineX.push(paletteWidth / 2 + paletteWidth * index);
+    palette.dataset.index = index;
+    palette.dataset.number = index;
+    palette.dataset.move = "false";
+
+    for (let i = 0; i < palette.childElementCount; i++) {
+        if (i !== 3) {
+            palette.children[i].addEventListener("pointerdown", (e) => {
+                e.stopPropagation();
+            });
+            palette.children[i].addEventListener("pointerup", (e) => {
+                e.stopPropagation();
+            });
+        }
+    }
+
+    addPointerEvt(palette, index);
+});
+
+function addPointerEvt(element, index) {
+    let itemIndex;
+
+    function translateX(e) {
+        e.preventDefault();
+        let currentPalettePosition = Number(element.dataset.number);
+        element.setPointerCapture(e.pointerId);
+
+        const moveDistance = e.clientX - element.offsetWidth / 2 - element.offsetWidth * currentPalettePosition;
+        element.style.transform = `translate(${moveDistance}px,0)`;
+
+        if (e.clientX + element.offsetWidth / 2 > paletteMidLineX[itemIndex + 1]) {
+            const nextElement = document.querySelector(`[data-index="${itemIndex + 1}"]`);
+            if (nextElement.dataset.move == "true") {
+                nextElement.style.transform = `translate(0,0px)`;
+                element.dataset.index = itemIndex + 1;
+                nextElement.dataset.index = itemIndex;
+                nextElement.dataset.move = "false";
+                itemIndex++;
+                return;
+            }
+            nextElement.style.transform = `translate(${-element.offsetWidth}px,0)`;
+            element.dataset.index = itemIndex + 1;
+            nextElement.dataset.index = itemIndex;
+            nextElement.dataset.move = "true";
+            itemIndex++;
+        }
+        if (e.clientX - element.offsetWidth / 2 < paletteMidLineX[itemIndex - 1]) {
+            const lastElement = document.querySelector(`[data-index="${itemIndex - 1}"]`);
+
+            if (lastElement.dataset.move == "true") {
+                lastElement.style.transform = `translate(0,0)`;
+                element.dataset.index = itemIndex - 1;
+                lastElement.dataset.index = itemIndex;
+                lastElement.dataset.move = "false";
+                itemIndex--;
+                return;
+            }
+            lastElement.style.transform = `translate(${element.offsetWidth}px,0)`;
+            element.dataset.index = itemIndex - 1;
+            lastElement.dataset.index = itemIndex;
+            lastElement.dataset.move = "true";
+            itemIndex--;
+        }
+    }
+
+    function translateY(e) {
+        e.preventDefault();
+        let currentPalettePosition = Number(element.dataset.number);
+        element.setPointerCapture(e.pointerId);
+
+        const moveDistance = e.clientY - element.offsetHeight / 2 - element.offsetHeight * currentPalettePosition;
+        element.style.transform = `translate(0,${moveDistance}px)`;
+
+        if (e.clientY + element.offsetHeight / 2 > paletteMidLineY[itemIndex + 1]) {
+            const nextElement = document.querySelector(`[data-index="${itemIndex + 1}"]`);
+            if (nextElement.dataset.move == "true") {
+                nextElement.style.transform = `translate(0,0px)`;
+                element.dataset.index = itemIndex + 1;
+                nextElement.dataset.index = itemIndex;
+                nextElement.dataset.move = "false";
+                itemIndex++;
+                return;
+            }
+            nextElement.style.transform = `translate(0,${-element.offsetHeight}px)`;
+            element.dataset.index = itemIndex + 1;
+            nextElement.dataset.index = itemIndex;
+            nextElement.dataset.move = "true";
+            itemIndex++;
+        }
+        if (e.clientY - element.offsetHeight / 2 < paletteMidLineY[itemIndex - 1]) {
+            const lastElement = document.querySelector(`[data-index="${itemIndex - 1}"]`);
+
+            if (lastElement.dataset.move == "true") {
+                lastElement.style.transform = `translate(0,0)`;
+                element.dataset.index = itemIndex - 1;
+                lastElement.dataset.index = itemIndex;
+                lastElement.dataset.move = "false";
+                itemIndex--;
+                return;
+            }
+            lastElement.style.transform = `translate(0,${element.offsetHeight}px)`;
+            element.dataset.index = itemIndex - 1;
+            lastElement.dataset.index = itemIndex;
+            lastElement.dataset.move = "true";
+            itemIndex--;
+        }
+    }
+
+    element.addEventListener("pointerdown", (e) => {
+        console.log(window.innerWidth);
+        element.style.zIndex = "8";
+        itemIndex = Number(element.dataset.index);
+        if (window.innerWidth <= 950) {
+            element.addEventListener("pointermove", translateY);
+            element.removeEventListener("pointermove", translateX);
+        }
+        if (window.innerWidth > 950) {
+            element.addEventListener("pointermove", translateX);
+            element.removeEventListener("pointermove", translateY);
+        }
+    });
+
+    element.addEventListener("pointerup", (e) => {
+        for (let i = 0; i < 5; i++) {
+            const palette = document.querySelector(`[data-index="${i}"]`);
+            palette.dataset.move = "false";
+            palette.dataset.number = `${palette.dataset.index}`;
+            palette.style.transform = `translate(0,0)`;
+            palette.style.zIndex = "0";
+
+            container.appendChild(palette);
+        }
+        element.releasePointerCapture(e.pointerId);
+        element.removeEventListener("pointermove", translateY);
+        element.removeEventListener("pointermove", translateX);
+    });
+}
