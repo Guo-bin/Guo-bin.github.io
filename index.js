@@ -45,20 +45,20 @@ i.forEach((btn) => {
     });
 });
 //禁止滑動
-const html = document.querySelector("html");
-const body = document.querySelector("body");
-html.addEventListener("pointerdown", (e) => {
-    e.preventDefault();
-});
-html.addEventListener("pointermove", (e) => {
-    e.preventDefault();
-});
-body.addEventListener("pointerdown", (e) => {
-    e.preventDefault();
-});
-body.addEventListener("pointermove", (e) => {
-    e.preventDefault();
-});
+// const html = document.querySelector("html");
+// const body = document.querySelector("body");
+// html.addEventListener("pointerdown", (e) => {
+//     e.preventDefault();
+// });
+// html.addEventListener("pointermove", (e) => {
+//     e.preventDefault();
+// });
+// body.addEventListener("pointerdown", (e) => {
+//     e.preventDefault();
+// });
+// body.addEventListener("pointermove", (e) => {
+//     e.preventDefault();
+// });
 ///////////
 let colorHistory = [];
 let currentHistory = 0;
