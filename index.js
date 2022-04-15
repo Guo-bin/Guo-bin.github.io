@@ -44,7 +44,7 @@ i.forEach((btn) => {
         e.preventDefault();
     });
 });
-window.alert("3");
+
 ///////////
 let colorHistory = [];
 let currentHistory = 0;
@@ -405,7 +405,7 @@ let paletteMidLineY = [];
 let containerWidth = container.offsetWidth;
 let paletteWidth = containerWidth / 5;
 let paletteMidLineX = [];
-window.alert("hi22ss3SS");
+
 palettes.forEach((palette, index) => {
     paletteMidLineY.push(paletteHeight / 2 + paletteHeight * index);
     paletteMidLineX.push(paletteWidth / 2 + paletteWidth * index);
@@ -416,10 +416,15 @@ palettes.forEach((palette, index) => {
     for (let i = 0; i < palette.childElementCount; i++) {
         if (i !== 3) {
             palette.children[i].addEventListener("pointerdown", (e) => {
-                e.preventDefault();
+                e.stopPropagation();
+            });
+            palette.children[i].addEventListener("pointerup", (e) => {
                 e.stopPropagation();
             });
         }
+        palette.children[i].addEventListener("touchstart", (e) => {
+            e.stopPropagation();
+        });
     }
 
     addPointerEvt(palette, index);
@@ -474,7 +479,7 @@ function addPointerEvt(element, index) {
     function translateY(e) {
         e.preventDefault();
         let currentPalettePosition = Number(element.dataset.number);
-        // element.setPointerCapture(e.pointerId);
+        element.setPointerCapture(e.pointerId);
 
         const moveDistance = e.clientY - element.offsetHeight / 2 - element.offsetHeight * currentPalettePosition;
         element.style.transform = `translate(0,${moveDistance}px)`;
