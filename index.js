@@ -422,6 +422,9 @@ palettes.forEach((palette, index) => {
                 e.stopPropagation();
             });
         }
+        palette.children[i].addEventListener("touchstart", (e) => {
+            e.stopPropagation();
+        });
     }
 
     addPointerEvt(palette, index);
