@@ -367,7 +367,7 @@ div.button {
 input[type="color"] {
     position: absolute;
     z-index: -10;
-    
+    background:transparent;
 }
 
 label.colorInput {
