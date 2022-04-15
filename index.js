@@ -523,6 +523,7 @@ function addPointerEvt(element, index) {
     });
     element.addEventListener("pointerdown", (e) => {
         e.preventDefault();
+
         console.log(window.innerWidth);
         element.style.zIndex = "8";
         itemIndex = Number(element.dataset.index);
@@ -537,13 +538,13 @@ function addPointerEvt(element, index) {
     });
 
     element.addEventListener("pointerup", (e) => {
+        e.preventDefault();
         for (let i = 0; i < 5; i++) {
             const palette = document.querySelector(`[data-index="${i}"]`);
             palette.dataset.move = "false";
             palette.dataset.number = `${palette.dataset.index}`;
             palette.style.transform = `translate(0,0)`;
             palette.style.zIndex = "0";
-
             container.appendChild(palette);
         }
         element.releasePointerCapture(e.pointerId);
