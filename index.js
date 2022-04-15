@@ -35,7 +35,7 @@ btns.forEach((btn) => {
     btn.addEventListener("gesturestart", function (e) {
         e.preventDefault();
     });
-    btn.addEventListener("dblclick", () => {
+    btn.addEventListener("dblclick", (e) => {
         e.preventDefault();
     });
 });
