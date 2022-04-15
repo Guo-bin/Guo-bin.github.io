@@ -416,10 +416,12 @@ palettes.forEach((palette, index) => {
     for (let i = 0; i < palette.childElementCount; i++) {
         if (i !== 3) {
             palette.children[i].addEventListener("pointerdown", (e) => {
+                e.preventDefault();
                 e.stopPropagation();
             });
         }
         palette.children[i].addEventListener("touchstart", (e) => {
+            e.preventDefault();
             e.stopPropagation();
         });
     }
@@ -515,11 +517,10 @@ function addPointerEvt(element, index) {
             itemIndex--;
         }
     }
-    // element.addEventListener("touchstart", (e) => {
-    //     e.preventDefault();
-    // });
+    element.addEventListener("touchstart", (e) => {
+        e.preventDefault();
+    });
     element.addEventListener("pointerdown", (e) => {
-        window.alert("YOU CLICK ME");
         e.preventDefault();
         console.log(window.innerWidth);
         element.style.zIndex = "8";
