@@ -405,7 +405,7 @@ let paletteMidLineY = [];
 let containerWidth = container.offsetWidth;
 let paletteWidth = containerWidth / 5;
 let paletteMidLineX = [];
-window.alert("hi223");
+window.alert("hi22ss3");
 palettes.forEach((palette, index) => {
     paletteMidLineY.push(paletteHeight / 2 + paletteHeight * index);
     paletteMidLineX.push(paletteWidth / 2 + paletteWidth * index);
