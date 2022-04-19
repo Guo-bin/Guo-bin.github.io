@@ -114,6 +114,10 @@ function selectColor(element) {
         palette.children[0].innerHTML = hex.slice(1, 7);
         brightnessChange(palette, hex.slice(1, 7));
 
+        //當改變顏色時會將colorHistory[currentHistory]後面的顏色清空
+        colorHistory = colorHistory.filter((colors, index) => {
+            return index <= currentHistory;
+        });
         const saveToColorHisotry = [];
         palettes.forEach((palette) => {
             saveToColorHisotry.push(palette.dataset.color);
@@ -121,20 +125,19 @@ function selectColor(element) {
         colorHistory.push(saveToColorHisotry);
         currentHistory++;
         console.log(colorHistory);
-        //當改變顏色時會將colorHistory[currentHistory]後面的顏色清空
-        colorHistory = colorHistory.filter((colors, index) => {
-            return index <= currentHistory;
-        });
     });
 }
 
 function initializePalette() {
     let subColorArr = [];
-    palettes.forEach((palette) => {
+    palettes.forEach((palette, index) => {
+        palette.dataset.index = index;
+        palette.dataset.number = index;
+        palette.dataset.move = "false";
         changeColor(palette);
         subColorArr.push(palette.dataset.color);
 
-        //add colorHex to span
+        //add colorHex to saveColorWindow span
         const collection = document.querySelector(".collection");
         const colorBlock = document.createElement("div");
         const hexNumber = document.createElement("span");
@@ -148,17 +151,35 @@ function initializePalette() {
 
         //use color input to change color;
         const colorSelector = palette.children[5];
-
         selectColor(colorSelector);
 
-        // add Drag event to palette;
-        // addDragEvt(palette);
+        //prevent touch Default
+        palette.addEventListener("touchstart", (e) => {
+            e.preventDefault();
+        });
+        //prevent pointer default
+        for (let i = 0; i < palette.childElementCount; i++) {
+            if (i !== 3) {
+                palette.children[i].addEventListener("pointerdown", (e) => {
+                    e.stopPropagation();
+                });
+                palette.children[i].addEventListener("pointerup", (e) => {
+                    e.stopPropagation();
+                });
+            }
+            palette.children[i].addEventListener("touchstart", (e) => {
+                e.stopPropagation();
+            });
+        }
+        //add pointerEvt
+        addPointerEvt(palette, index);
     });
     //push color set to colorHistory;
     colorHistory.push(subColorArr);
 }
 
 initializePalette();
+
 function turnBack() {
     const palettes = document.querySelectorAll(".palette");
     if (currentHistory > 0) {
@@ -186,7 +207,8 @@ function turnFront() {
         });
     }
 }
-
+turnBackButton.addEventListener("click", turnBack);
+turnFrontButton.addEventListener("click", turnFront);
 changeButton.addEventListener("click", () => {
     const palettes = document.querySelectorAll(".palette");
     //當改變顏色時會將colorHistory[currentHistory]後面的顏色清空
@@ -209,8 +231,6 @@ changeButton.addEventListener("click", () => {
     console.log(colorHistory);
 });
 
-turnBackButton.addEventListener("click", turnBack);
-turnFrontButton.addEventListener("click", turnFront);
 lockButtons.forEach((button) => {
     button.addEventListener("click", function () {
         if (this.dataset.lock == "false") {
@@ -282,7 +302,7 @@ function mapArrayColorsToSideMenu(colorArr) {
     });
 }
 
-//get localStorage data and map then to sidemenu
+//get localStorage data and map them to sidemenu
 let colorList = localStorage.getItem("colorList");
 if (colorList !== null) {
     colorList = JSON.parse(colorList);
@@ -356,93 +376,69 @@ spans.forEach((span) => {
     });
 });
 
-function addDragEvt(element) {
-    element.addEventListener("mousedown", () => {
-        element.setAttribute("draggable", "true");
-    });
-    element.addEventListener("dragstart", (e) => {
-        element.classList.add("dragging");
-        source = element;
-    });
-    element.addEventListener("dragend", () => {
-        element.classList.remove("dragging");
-        element.removeAttribute("draggable");
-        source = null;
-    });
-}
+// function addDragEvt(element) {
+//     element.addEventListener("mousedown", () => {
+//         element.setAttribute("draggable", "true");
+//     });
+//     element.addEventListener("dragstart", (e) => {
+//         element.classList.add("dragging");
+//         source = element;
+//     });
+//     element.addEventListener("dragend", () => {
+//         element.classList.remove("dragging");
+//         element.removeAttribute("draggable");
+//         source = null;
+//     });
+// }
 
-let overItem = null;
-function cleanOverItem() {
-    if (!overItem) return;
-    overItem.classList.remove("before");
-    overItem.classList.remove("after");
-    overItem = null;
-}
-function addDropEvt(element) {
-    element.addEventListener("dragover", (e) => {
-        cleanOverItem();
+// let overItem = null;
+// function cleanOverItem() {
+//     if (!overItem) return;
+//     overItem.classList.remove("before");
+//     overItem.classList.remove("after");
+//     overItem = null;
+// }
+// function addDropEvt(element) {
+//     element.addEventListener("dragover", (e) => {
+//         cleanOverItem();
 
-        if (e.target.getAttribute("data-color") && e.target !== source) {
-            overItem = e.target;
+//         if (e.target.getAttribute("data-color") && e.target !== source) {
+//             overItem = e.target;
 
-            if (e.offsetX > e.target.offsetWidth / 2) {
-                overItem.classList.add("after");
-            } else {
-                overItem.classList.add("before");
-            }
-        }
-        e.preventDefault();
-    });
-    element.addEventListener("drop", (e) => {
-        const list = document.querySelector(".palette-container");
-        if (overItem) {
-            if (overItem.classList.contains("before")) {
-                list.insertBefore(source, overItem);
-            } else {
-                list.insertBefore(source, overItem.nextElementSibling);
-            }
-        } else {
-            if (e.currentTarget.contains(source)) return;
-            list.appendChild(source);
-        }
-        cleanOverItem();
-    });
-}
+//             if (e.offsetX > e.target.offsetWidth / 2) {
+//                 overItem.classList.add("after");
+//             } else {
+//                 overItem.classList.add("before");
+//             }
+//         }
+//         e.preventDefault();
+//     });
+//     element.addEventListener("drop", (e) => {
+//         const list = document.querySelector(".palette-container");
+//         if (overItem) {
+//             if (overItem.classList.contains("before")) {
+//                 list.insertBefore(source, overItem);
+//             } else {
+//                 list.insertBefore(source, overItem.nextElementSibling);
+//             }
+//         } else {
+//             if (e.currentTarget.contains(source)) return;
+//             list.appendChild(source);
+//         }
+//         cleanOverItem();
+//     });
+// }
 
 // addDropEvt(container);
 
 //use when width less 950px;
-let containerHeight = container.offsetHeight;
-let paletteHeight = containerHeight / 5;
+let containerHeight;
+let paletteHeight;
 let paletteMidLineY = [];
 //use when width more 950px;
-let containerWidth = container.offsetWidth;
-let paletteWidth = containerWidth / 5;
+let containerWidth;
+let paletteWidth;
 let paletteMidLineX = [];
-
-palettes.forEach((palette, index) => {
-    paletteMidLineY.push(paletteHeight / 2 + paletteHeight * index);
-    paletteMidLineX.push(paletteWidth / 2 + paletteWidth * index);
-    palette.dataset.index = index;
-    palette.dataset.number = index;
-    palette.dataset.move = "false";
-
-    for (let i = 0; i < palette.childElementCount; i++) {
-        if (i !== 3) {
-            palette.children[i].addEventListener("pointerdown", (e) => {
-                e.stopPropagation();
-            });
-            palette.children[i].addEventListener("pointerup", (e) => {
-                e.stopPropagation();
-            });
-        }
-        palette.children[i].addEventListener("touchstart", (e) => {
-            e.stopPropagation();
-        });
-    }
-
-    addPointerEvt(palette, index);
-});
 
 function addPointerEvt(element, index) {
     let itemIndex;
@@ -532,9 +528,7 @@ function addPointerEvt(element, index) {
             itemIndex--;
         }
     }
-    element.addEventListener("touchstart", (e) => {
-        e.preventDefault();
-    });
+
     element.addEventListener("pointerdown", (e) => {
         e.preventDefault();
         element.setPointerCapture(e.pointerId);
@@ -542,10 +536,22 @@ function addPointerEvt(element, index) {
         element.style.zIndex = "8";
         itemIndex = Number(element.dataset.index);
         if (window.innerWidth <= 950) {
+            containerHeight = container.offsetHeight;
+            paletteHeight = containerHeight / 5;
+            paletteMidLineY = [];
+            palettes.forEach((palette, index) => {
+                paletteMidLineY.push(paletteHeight / 2 + paletteHeight * index);
+            });
             element.addEventListener("pointermove", translateY);
             element.removeEventListener("pointermove", translateX);
         }
         if (window.innerWidth > 950) {
+            containerWidth = container.offsetWidth;
+            paletteWidth = containerWidth / 5;
+            paletteMidLineX = [];
+            palettes.forEach((palette, index) => {
+                paletteMidLineX.push(paletteWidth / 2 + paletteWidth * index);
+            });
             element.addEventListener("pointermove", translateX);
             element.removeEventListener("pointermove", translateY);
         }
@@ -553,6 +559,10 @@ function addPointerEvt(element, index) {
 
     element.addEventListener("pointerup", (e) => {
         e.preventDefault();
+        //當拖曳改變顏色時會將colorHistory[currentHistory]後面的顏色清空
+        colorHistory = colorHistory.filter((colors, index) => {
+            return index <= currentHistory;
+        });
         const saveToColorHisotry = [];
         for (let i = 0; i < 5; i++) {
             const palette = document.querySelector(`[data-index="${i}"]`);
@@ -566,10 +576,6 @@ function addPointerEvt(element, index) {
         colorHistory.push(saveToColorHisotry);
         currentHistory++;
         console.log(colorHistory);
-        //當改變顏色時會將colorHistory[currentHistory]後面的顏色清空
-        colorHistory = colorHistory.filter((colors, index) => {
-            return index <= currentHistory;
-        });
 
         element.releasePointerCapture(e.pointerId);
         element.removeEventListener("pointermove", translateY);
