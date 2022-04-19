@@ -369,7 +369,14 @@ input[type="color"] {
     z-index: -10;
     background: transparent;
     border: none;
-    top: -3000px;
+    width: 0;
+    height: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    bottom: 50%;
+    border: none;
+    font-size: 1.8rem;
 }
 
 label.colorInput {
