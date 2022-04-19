@@ -52,6 +52,8 @@ body {
     right: 0;
     text-align: center;
     bottom: 15%;
+    margin: 0 auto;
+    width: fit-content;
 }
 
 .palette .copy {
@@ -59,7 +61,7 @@ body {
     position: absolute;
     left: 0;
     right: 0;
-    text-align: center;
+    width: fit-content;
     margin: 0 auto;
     background-color: transparent;
     border: none;
@@ -147,6 +149,7 @@ div.button {
     left: 0;
     right: 0;
     margin: 0 auto;
+    width: fit-content;
 }
 
 .lock:hover {
@@ -394,6 +397,7 @@ button.move {
     bottom: 35%;
     font-size: 2rem;
     transition: transform 0.1s ease-in-out;
+    width: fit-content;
 }
 
 .move:hover {
