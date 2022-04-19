@@ -365,18 +365,7 @@ div.button {
 }
 
 input[type="color"] {
-    position: absolute;
-    z-index: -10;
-    background: transparent;
-    border: none;
-    width: 0;
-    height: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-    bottom: 50%;
-    border: none;
-    font-size: 1.8rem;
+    visibility: hidden;
 }
 
 label.colorInput {
@@ -476,6 +465,7 @@ button.move {
         transition: transform 0.1s ease-in-out;
         height: fit-content;
     }
+
     label.colorInput {
         position: absolute;
         left: auto;
