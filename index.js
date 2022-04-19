@@ -74,7 +74,7 @@ function hexToRGB(hex) {
 }
 function brightnessChange(palette, hex) {
     const { r, g, b } = hexToRGB(hex);
-    console.log(r * 0.299 + g * 0.578 + b * 0.114);
+
     //乘上的數值為網路上的公式
     if (r * 0.299 + g * 0.578 + b * 0.114 >= 160) {
         palette.children[0].style.color = "black";
@@ -103,6 +103,7 @@ function changeColor(palette) {
 }
 function selectColor(element) {
     element.addEventListener("change", () => {
+        let palettes = document.querySelectorAll(".palette");
         let palette = element.parentElement;
         let hex = element.value.toUpperCase();
 
@@ -111,8 +112,19 @@ function selectColor(element) {
         palette.style.background = hex;
         palette.dataset.color = hex.slice(1, 7);
         palette.children[0].innerHTML = hex.slice(1, 7);
-
         brightnessChange(palette, hex.slice(1, 7));
+
+        const saveToColorHisotry = [];
+        palettes.forEach((palette) => {
+            saveToColorHisotry.push(palette.dataset.color);
+        });
+        colorHistory.push(saveToColorHisotry);
+        currentHistory++;
+        console.log(colorHistory);
+        //當改變顏色時會將colorHistory[currentHistory]後面的顏色清空
+        colorHistory = colorHistory.filter((colors, index) => {
+            return index <= currentHistory;
+        });
     });
 }
 
@@ -148,6 +160,7 @@ function initializePalette() {
 
 initializePalette();
 function turnBack() {
+    const palettes = document.querySelectorAll(".palette");
     if (currentHistory > 0) {
         currentHistory--;
         palettes.forEach((palette, index) => {
@@ -161,6 +174,7 @@ function turnBack() {
     }
 }
 function turnFront() {
+    const palettes = document.querySelectorAll(".palette");
     if (currentHistory < colorHistory.length - 1) {
         currentHistory++;
         palettes.forEach((palette, index) => {
@@ -186,11 +200,11 @@ changeButton.addEventListener("click", () => {
         }
     });
     //to save current color set
-    let subColorArr = [];
+    let saveToColorHisotry = [];
     palettes.forEach((palette) => {
-        subColorArr.push(palette.dataset.color);
+        saveToColorHisotry.push(palette.dataset.color);
     });
-    colorHistory.push(subColorArr);
+    colorHistory.push(saveToColorHisotry);
     currentHistory++;
     console.log(colorHistory);
 });
@@ -539,6 +553,7 @@ function addPointerEvt(element, index) {
 
     element.addEventListener("pointerup", (e) => {
         e.preventDefault();
+        const saveToColorHisotry = [];
         for (let i = 0; i < 5; i++) {
             const palette = document.querySelector(`[data-index="${i}"]`);
             palette.dataset.move = "false";
@@ -546,7 +561,16 @@ function addPointerEvt(element, index) {
             palette.style.transform = `translate(0,0)`;
             palette.style.zIndex = "0";
             container.appendChild(palette);
+            saveToColorHisotry.push(palette.dataset.color);
         }
+        colorHistory.push(saveToColorHisotry);
+        currentHistory++;
+        console.log(colorHistory);
+        //當改變顏色時會將colorHistory[currentHistory]後面的顏色清空
+        colorHistory = colorHistory.filter((colors, index) => {
+            return index <= currentHistory;
+        });
+
         element.releasePointerCapture(e.pointerId);
         element.removeEventListener("pointermove", translateY);
         element.removeEventListener("pointermove", translateX);
