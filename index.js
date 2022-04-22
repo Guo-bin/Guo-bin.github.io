@@ -532,7 +532,7 @@ function addPointerEvt(element, index) {
     element.addEventListener("pointerdown", (e) => {
         e.preventDefault();
         element.setPointerCapture(e.pointerId);
-        console.log(window.innerWidth);
+
         element.style.zIndex = "8";
         itemIndex = Number(element.dataset.index);
         if (window.innerWidth <= 950) {
@@ -575,7 +575,6 @@ function addPointerEvt(element, index) {
         }
         colorHistory.push(saveToColorHisotry);
         currentHistory++;
-        console.log(colorHistory);
 
         element.releasePointerCapture(e.pointerId);
         element.removeEventListener("pointermove", translateY);
